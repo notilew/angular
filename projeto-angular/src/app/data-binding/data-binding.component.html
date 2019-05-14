@@ -1,0 +1,131 @@
+<section>
+  <article class="interpolacao">
+    <h3>Interpolação</h3>
+    <p>string renderizada com interpolação: {{ url }}</p>
+    <p>resultado de 1 + 1 é: {{ 1 + 1 }}</p>
+    <p>resultado de 1 + 1 não é: {{ 1 + 1 + getValor() }}</p>
+    <p>curtiu o curso de Angular? {{ curtirCurso && getCurtirCurso() }}</p>
+  </article>
+
+  <article class="property-binding">
+    <h3>Property Binding</h3>
+    <p>
+      <img src="{{ urlImagem }}" alt="Natureza">
+    </p>
+    <p>
+      <img [src]="urlImagem" alt="Natureza">
+    </p>
+  </article>
+
+  <article class="class-style-binding">
+    <h3>Class e Style Binding </h3>
+    <div>
+      Selecione uma classe:
+      <select #varClasse (change)="0">
+        <option value="alert-success">Alert Success</option>
+        <option value="alert-info">Alert Info</option>
+        <option value="alert-warning">Alert Warning</option>
+        <option value="alert-danger">Alert Danger</option>
+      </select>
+    </div>
+
+    <div class="alert {{ varClasse.value }}" role="alert">
+      Texto colorido de acordo com o dropdown selecionado!
+    </div>
+
+    <div class="alert" role="alert" [class.alert-success]="varClasse.value == 'alert-success'">
+      Alert Success
+    </div>
+
+    <div class="alert" role="alert" [class.alert-info]="varClasse.value == 'alert-info'">
+      Alert Info
+    </div>
+
+    <div class="alert" role="alert" [class.alert-warning]="varClasse.value == 'alert-warning'">
+      Alert Warning
+    </div>
+
+    <div class="alert" role="alert" [class.alert-danger]="varClasse.value == 'alert-danger'">
+      Alert Danger
+    </div>
+
+    <div class="alert alert-danger" role="alert" [style.display]="varClasse.value == 'alert-danger' ? 'block' : 'none'">
+      Texto colorido somente se o dropdown
+    </div>
+  </article>
+
+  <article class="event-binding">
+    <h3>Event Binding</h3>
+    <div>
+      <button class="btn btn-primary" (click)="exibirAlerta()">Me Clique!</button>
+    </div>
+
+    <br>
+
+    <div>
+      <input type="text" #valor (keyup)="copiaFrase($event)" (keyup.enter)="salvaFrase(valor.value)"
+        (blur)="salvaFrase(valor.value)">
+      <p>Frase Digitada: {{ varCopiaFrase }}</p>
+      <p>Frase Salva: {{ varSalvaFrase }}</p>
+    </div>
+
+    <div>
+      <span [class.highlight]="mouse" (mouseover)="escutaMouse()" (mouseout)="escutaMouse()">
+        Passe o mouse sobre min!
+      </span>
+    </div>
+  </article>
+
+  <article class="two-way-data-binding">
+    <h3>Two-Way Data Binding</h3>
+
+    <h4>Two-Way Data Binding com Property Binding e Event Binding</h4>
+    <div>
+      <input type="text" [value]="nome" (input)="nome = $event.target.value">
+      <p>Valor Digitado: {{ nome }}</p>
+    </div>
+
+    <h4>Two-Way Data Binding com ngModel</h4>
+    <div>
+      <input type="text" [(ngModel)]="nome">
+      <p>Valor Digitado: {{ nome }}</p>
+    </div>
+
+    <h4>Two-Way Data Binding com ngModel e Objeto</h4>
+    <div>
+      <input type="text" [(ngModel)]="pessoa.nome">
+      <input type="text" [(ngModel)]="pessoa.idade">
+      <input type="text" [(ngModel)]="pessoa.cpf">
+      <input type="text" [(ngModel)]="pessoa.endereco.cep">
+      <input type="text" [(ngModel)]="pessoa.endereco.logradouro">
+      <input type="text" [(ngModel)]="pessoa.endereco.numero">
+      <input type="text" [(ngModel)]="pessoa.endereco.bairro">
+      <input type="text" [(ngModel)]="pessoa.endereco.cidade">
+      <input type="text" [(ngModel)]="pessoa.endereco.estado">
+
+      <p>
+        Meu nome é {{ pessoa.nome }}, CPF:{{ pessoa.cpf }} e tenho {{ pessoa.idade }} anos. Meu endereço é CEP:
+        {{ pessoa.endereco.cep }}, {{ pessoa.endereco.logradouro }}, {{ pessoa.endereco.numero }},
+        {{ pessoa.endereco.bairro }}, {{ pessoa.endereco.cidade }}, {{ pessoa.endereco.estado }}.
+      </p>
+    </div>
+  </article>
+
+  <article class="input-property">
+    <h3>Input Properties</h3>
+    <div>
+      <app-input-property
+      [nome-curso]="nomeDoCurso" [nome-professor]="nomeDoProfessor" [data]="data">
+      </app-input-property>
+    </div>
+  </article>
+
+  <article class="output-property">
+    <h3>Output Property</h3>
+    <div>
+      <app-output-property>
+        
+      </app-output-property>
+    </div>
+  </article>
+</section>
